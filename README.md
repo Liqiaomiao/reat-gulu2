@@ -1,2 +1,0 @@
-# react-gulu
-react-gulu
