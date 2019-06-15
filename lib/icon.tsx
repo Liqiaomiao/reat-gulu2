@@ -2,9 +2,7 @@ import React from 'react';
 import './importicons'
 import './icon.scss'
 interface IconProps extends React.SVGAttributes<SVGElement>{
-    name: string,
-    onClick: React.MouseEventHandler<SVGElement>
-   // onClick: (e:React.MouseEvent)=> void
+    name: string
 }
 
 
