@@ -12,6 +12,6 @@ const fn:React.MouseEventHandler = (e) =>{
 //
 // };
 ReactDom.render(<div>
-        <Icon name="wechat" onClick = {fn}/>
+        <Icon className="wechat" name="wechat" onClick = {fn}/>
     </div>,
     document.getElementById('root'));
