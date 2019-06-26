@@ -7,14 +7,11 @@ describe('icon', () => {
         const json = renderer.create(<Icon name={'wechat'}/>).toJSON();
         expect(json).toMatchSnapshot()
     })
-    it('onclick',()=>{
-        let n = 1;
-        const fn = ()=> {
-            n =2
-        }
+    it('onclick fn被调用',()=>{
+        const fn = jest.fn();
         const component = mount(<Icon name={'alipay'} onClick={fn}/>);
         console.log(component.find('svg'));
         component.find('svg').simulate('click');
-        expect(n).toEqual(2)
+        expect(fn).toBeCalled()
     })
 });
