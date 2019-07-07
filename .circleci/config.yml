@@ -52,6 +52,8 @@ jobs:
       - run: git config --global user.name $USER_NAME
       - run: git add .
       - run: git commit -m 'update'
+      - run: git config --global user.email $EMAIL
+      - run: git config --global user.name $USER_NAME
       - run: git push
       - store_test_results:
           path: test-results
