@@ -39,9 +39,6 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - add_ssh_keys:
-              fingerprints:
-                - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
       - attach_workspace:
           at: .
       - run: yarn ci
@@ -52,8 +49,6 @@ jobs:
       - run: git config --global user.name $USER_NAME
       - run: git add .
       - run: git commit -m 'update'
-      - run: git config --global user.email $EMAIL
-      - run: git config --global user.name $USER_NAME
       - run: git push
       - store_test_results:
           path: test-results
