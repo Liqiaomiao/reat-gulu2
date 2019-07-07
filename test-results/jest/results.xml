@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="9" failures="0" time="5.892">
-  <testsuite name="我的第一个测试用例" errors="0" failures="0" skipped="0" timestamp="2019-07-07T17:03:20" time="2.29" tests="1">
-    <testcase classname="我的第一个测试用例 add(1,2) equal 3" name="我的第一个测试用例 add(1,2) equal 3" time="0.004">
+<testsuites name="jest tests" tests="9" failures="0" time="5.936">
+  <testsuite name="我的第一个测试用例" errors="0" failures="0" skipped="0" timestamp="2019-07-07T17:04:17" time="2.226" tests="1">
+    <testcase classname="我的第一个测试用例 add(1,2) equal 3" name="我的第一个测试用例 add(1,2) equal 3" time="0.005">
     </testcase>
   </testsuite>
-  <testsuite name="button" errors="0" failures="0" skipped="0" timestamp="2019-07-07T17:03:20" time="2.704" tests="1">
-    <testcase classname="button 是个div " name="button 是个div " time="0.016">
+  <testsuite name="button" errors="0" failures="0" skipped="0" timestamp="2019-07-07T17:04:17" time="2.64" tests="1">
+    <testcase classname="button 是个div " name="button 是个div " time="0.015">
     </testcase>
   </testsuite>
-  <testsuite name="classes" errors="0" failures="0" skipped="0" timestamp="2019-07-07T17:03:20" time="2.687" tests="5">
+  <testsuite name="classes" errors="0" failures="0" skipped="0" timestamp="2019-07-07T17:04:17" time="2.752" tests="5">
     <testcase classname="classes 接受 1 个class" name="classes 接受 1 个class" time="0.004">
     </testcase>
     <testcase classname="classes 接受 2 个class" name="classes 接受 2 个class" time="0">
@@ -20,8 +20,8 @@
     <testcase classname="classes 接受 0 个参数" name="classes 接受 0 个参数" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="icon" errors="0" failures="0" skipped="0" timestamp="2019-07-07T17:03:20" time="3.07" tests="2">
-    <testcase classname="icon xxx" name="icon xxx" time="0.012">
+  <testsuite name="icon" errors="0" failures="0" skipped="0" timestamp="2019-07-07T17:04:17" time="3.08" tests="2">
+    <testcase classname="icon xxx" name="icon xxx" time="0.013">
     </testcase>
     <testcase classname="icon onclick fn被调用" name="icon onclick fn被调用" time="0.038">
     </testcase>
