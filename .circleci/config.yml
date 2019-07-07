@@ -62,6 +62,12 @@ jobs:
 
 workflows:
   version: 2
+  jobs:
+    deploy-job:
+      steps:
+        - add_ssh_keys:
+            fingerprints:
+              - "SO:ME:FIN:G:ER:PR:IN:T"
   build_accept_deploy:
     jobs:
       - prepare
