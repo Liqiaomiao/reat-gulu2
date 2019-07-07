@@ -41,7 +41,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "65:8b:8f:c7:f6:4b:0d:56:d8:13:80:1c:d0:ce:14:62"
+            - "SO:ME:FIN:G:ER:PR:IN:T"
       - attach_workspace:
           at: .
       - run: yarn ci
