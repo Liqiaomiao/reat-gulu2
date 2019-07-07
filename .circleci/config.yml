@@ -67,7 +67,7 @@ workflows:
       steps:
         - add_ssh_keys:
             fingerprints:
-              - "SO:ME:FIN:G:ER:PR:IN:T"
+              - "8e:73:ab:56:6e:aa:98:fa:a2:6f:fd:42:7c:87:43:4c"
   build_accept_deploy:
     jobs:
       - prepare
