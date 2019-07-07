@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="9" failures="0" time="7.143">
-  <testsuite name="我的第一个测试用例" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:02:54" time="2.917" tests="1">
+<testsuites name="jest tests" tests="9" failures="0" time="6.355">
+  <testsuite name="我的第一个测试用例" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:03:59" time="2.298" tests="1">
     <testcase classname="我的第一个测试用例 add(1,2) equal 3" name="我的第一个测试用例 add(1,2) equal 3" time="0.004">
     </testcase>
   </testsuite>
-  <testsuite name="button" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:02:54" time="3.159" tests="1">
-    <testcase classname="button 是个div " name="button 是个div " time="0.024">
+  <testsuite name="button" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:03:59" time="2.753" tests="1">
+    <testcase classname="button 是个div " name="button 是个div " time="0.021">
     </testcase>
   </testsuite>
-  <testsuite name="classes" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:02:54" time="3.412" tests="5">
-    <testcase classname="classes 接受 1 个class" name="classes 接受 1 个class" time="0.004">
+  <testsuite name="classes" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:03:59" time="2.839" tests="5">
+    <testcase classname="classes 接受 1 个class" name="classes 接受 1 个class" time="0.005">
     </testcase>
-    <testcase classname="classes 接受 2 个class" name="classes 接受 2 个class" time="0.001">
+    <testcase classname="classes 接受 2 个class" name="classes 接受 2 个class" time="0.011">
     </testcase>
     <testcase classname="classes 接受 undefined ,结果不会出现undefined" name="classes 接受 undefined ,结果不会出现undefined" time="0">
     </testcase>
@@ -20,10 +20,10 @@
     <testcase classname="classes 接受 0 个参数" name="classes 接受 0 个参数" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="icon" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:02:54" time="3.977" tests="2">
-    <testcase classname="icon xxx" name="icon xxx" time="0.012">
+  <testsuite name="icon" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:03:59" time="3.149" tests="2">
+    <testcase classname="icon xxx" name="icon xxx" time="0.015">
     </testcase>
-    <testcase classname="icon onclick fn被调用" name="icon onclick fn被调用" time="0.04">
+    <testcase classname="icon onclick fn被调用" name="icon onclick fn被调用" time="0.042">
     </testcase>
   </testsuite>
 </testsuites>
