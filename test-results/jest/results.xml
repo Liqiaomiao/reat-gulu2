@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="9" failures="0" time="5.562">
-  <testsuite name="我的第一个测试用例" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:22:05" time="2.104" tests="1">
+<testsuites name="jest tests" tests="9" failures="0" time="6.025">
+  <testsuite name="我的第一个测试用例" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:22:47" time="2.262" tests="1">
     <testcase classname="我的第一个测试用例 add(1,2) equal 3" name="我的第一个测试用例 add(1,2) equal 3" time="0.004">
     </testcase>
   </testsuite>
-  <testsuite name="button" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:22:05" time="2.532" tests="1">
-    <testcase classname="button 是个div " name="button 是个div " time="0.015">
-    </testcase>
-  </testsuite>
-  <testsuite name="classes" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:22:05" time="2.618" tests="5">
+  <testsuite name="classes" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:22:47" time="2.696" tests="5">
     <testcase classname="classes 接受 1 个class" name="classes 接受 1 个class" time="0.004">
     </testcase>
-    <testcase classname="classes 接受 2 个class" name="classes 接受 2 个class" time="0">
+    <testcase classname="classes 接受 2 个class" name="classes 接受 2 个class" time="0.001">
     </testcase>
-    <testcase classname="classes 接受 undefined ,结果不会出现undefined" name="classes 接受 undefined ,结果不会出现undefined" time="0.001">
+    <testcase classname="classes 接受 undefined ,结果不会出现undefined" name="classes 接受 undefined ,结果不会出现undefined" time="0">
     </testcase>
     <testcase classname="classes 接受各种奇怪的值" name="classes 接受各种奇怪的值" time="0">
     </testcase>
     <testcase classname="classes 接受 0 个参数" name="classes 接受 0 个参数" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="icon" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:22:05" time="2.884" tests="2">
+  <testsuite name="button" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:22:47" time="2.769" tests="1">
+    <testcase classname="button 是个div " name="button 是个div " time="0.016">
+    </testcase>
+  </testsuite>
+  <testsuite name="icon" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:22:47" time="3.114" tests="2">
     <testcase classname="icon xxx" name="icon xxx" time="0.012">
     </testcase>
-    <testcase classname="icon onclick fn被调用" name="icon onclick fn被调用" time="0.036">
+    <testcase classname="icon onclick fn被调用" name="icon onclick fn被调用" time="0.039">
     </testcase>
   </testsuite>
 </testsuites>
