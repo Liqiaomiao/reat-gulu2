@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="9" failures="0" time="5.801">
-  <testsuite name="我的第一个测试用例" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:40:59" time="2.22" tests="1">
+<testsuites name="jest tests" tests="9" failures="0" time="6.999">
+  <testsuite name="我的第一个测试用例" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:42:29" time="2.883" tests="1">
     <testcase classname="我的第一个测试用例 add(1,2) equal 3" name="我的第一个测试用例 add(1,2) equal 3" time="0.004">
     </testcase>
   </testsuite>
-  <testsuite name="button" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:40:59" time="2.61" tests="1">
-    <testcase classname="button 是个div " name="button 是个div " time="0.015">
+  <testsuite name="button" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:42:29" time="3.306" tests="1">
+    <testcase classname="button 是个div " name="button 是个div " time="0.03">
     </testcase>
   </testsuite>
-  <testsuite name="classes" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:40:59" time="2.618" tests="5">
-    <testcase classname="classes 接受 1 个class" name="classes 接受 1 个class" time="0.004">
+  <testsuite name="classes" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:42:29" time="3.454" tests="5">
+    <testcase classname="classes 接受 1 个class" name="classes 接受 1 个class" time="0.007">
     </testcase>
     <testcase classname="classes 接受 2 个class" name="classes 接受 2 个class" time="0">
     </testcase>
@@ -17,13 +17,13 @@
     </testcase>
     <testcase classname="classes 接受各种奇怪的值" name="classes 接受各种奇怪的值" time="0">
     </testcase>
-    <testcase classname="classes 接受 0 个参数" name="classes 接受 0 个参数" time="0">
+    <testcase classname="classes 接受 0 个参数" name="classes 接受 0 个参数" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="icon" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:40:59" time="2.98" tests="2">
-    <testcase classname="icon xxx" name="icon xxx" time="0.012">
+  <testsuite name="icon" errors="0" failures="0" skipped="0" timestamp="2019-07-07T18:42:29" time="3.769" tests="2">
+    <testcase classname="icon xxx" name="icon xxx" time="0.013">
     </testcase>
-    <testcase classname="icon onclick fn被调用" name="icon onclick fn被调用" time="0.038">
+    <testcase classname="icon onclick fn被调用" name="icon onclick fn被调用" time="0.041">
     </testcase>
   </testsuite>
 </testsuites>
