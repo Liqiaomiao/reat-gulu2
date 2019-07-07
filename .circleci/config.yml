@@ -44,13 +44,15 @@ jobs:
       - run: yarn ci
       - run: cd coverage
       - run: git init
+      - run: git clone --depth 1 https://${GITHUB_PERSONAL_TOKEN}git@github.com:Liqiaomiao/react-gulu.git
       - run: git config --global user.email $EMAIL
       - run: git config --global user.name $USER_NAME
       - run: git add .
       - run: git commit -m 'update'
       - run: git config --global user.email $EMAIL
       - run: git config --global user.name $USER_NAME
-      - run: git push origin master
+      - run: git push -q https://${GITHUB_PERSONAL_TOKEN}git@github.com:Liqiaomiao/react-gulu.git master
+      #- run: git push origin master
       - store_test_results:
           path: test-results
   publish:
