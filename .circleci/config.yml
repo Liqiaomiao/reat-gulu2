@@ -39,6 +39,9 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - add_ssh_keys:
+              fingerprints:
+                - "f1:97:f8:dc:cd:75:f6:86:cd:74:0f:f8:df:e1:35:25"
       - attach_workspace:
           at: .
       - run: yarn ci
