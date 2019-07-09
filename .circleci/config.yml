@@ -44,14 +44,14 @@ jobs:
       - run: yarn ci
       - run: cd coverage
       - run: git init
-      - run: git remote pull https://github.com/Liqiaomiao/react-gulu.git
+      - run: git brach -b test
       - run: git config --global user.email $EMAIL
       - run: git config --global user.name $USER_NAME
       - run: git add .
       - run: git commit -m 'update'
       - run: git config --global user.email $EMAIL
       - run: git config --global user.name $USER_NAME
-      - run: git push https://github.com/Liqiaomiao/react-gulu.git
+      - run: git push test
       #- run: git push origin master
       - store_test_results:
           path: test-results
