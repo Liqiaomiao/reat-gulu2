@@ -3,6 +3,8 @@ import ReactDom from 'react-dom'
 import {HashRouter as Router, Route, Link} from "react-router-dom";
 import IconExample from './lib/icon/icon.example'
 import ButtonExample from './lib/button/button.example'
+import  App  from './playground/useClass'
+import  {App as Lisa}  from './playground/useFun'
 ReactDom.render((
     <Router>
         <div>
@@ -21,11 +23,19 @@ ReactDom.render((
                         <li>
                             <Link to='/button'>Button</Link>
                         </li>
+                        <li>
+                            <Link to='/useclass'>useclass</Link>
+                        </li>
+                        <li>
+                            <Link to='/useFun'>useFun</Link>
+                        </li>
                     </ul>
                 </aside>
                 <main>
                     <Route path="/icon" component={IconExample}/>
                     <Route path="/button" component={ButtonExample}/>
+                    <Route path="/useclass" component={App}/>
+                    <Route path="/useFun" component={Lisa}/>
                 </main>
             </div>
         </div>
