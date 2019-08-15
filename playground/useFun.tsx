@@ -42,4 +42,4 @@ App.defaultProps = {
 App.displayName = "Lisa";
 // App.propTypes = {
 //     message: PropTypes.number
-export   {App}
+export  default App
