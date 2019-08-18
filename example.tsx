@@ -5,6 +5,7 @@ import IconExample from './lib/icon/icon.example'
 import ButtonExample from './lib/button/button.example'
 import  App  from './playground/useClass'
 import  {default as Lisa}  from './playground/useFun'
+import Dialog from "./lib/dialog/dialog.example";
 ReactDom.render((
     <Router>
         <div>
@@ -29,6 +30,9 @@ ReactDom.render((
                         <li>
                             <Link to='/useFun'>useFun</Link>
                         </li>
+                        <li>
+                            <Link to='/dialog'>dialog</Link>
+                        </li>
                     </ul>
                 </aside>
                 <main>
@@ -36,6 +40,7 @@ ReactDom.render((
                     <Route path="/button" component={ButtonExample}/>
                     <Route path="/useclass" component={App}/>
                     <Route path="/useFun" component={Lisa}/>
+                    <Route path="/dialog" component={Dialog}/>
                 </main>
             </div>
         </div>
