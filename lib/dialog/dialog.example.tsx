@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Dialog, {alert} from "./dialog";
+import Dialog, {alert, confirm} from "./dialog";
 
 export default function () {
     const [x, setX]  = useState(false);
@@ -18,6 +18,9 @@ export default function () {
             </div>
             <div>
                 <button onClick={()=>alert('somthing wrong')}>alert</button>
+                <button onClick={()=>{confirm('are you sure', ()=>{console.log('yes')},
+                    ()=>{console.log('no')})
+                }}>confirm</button>
             </div>
         </div>
 

@@ -63,7 +63,7 @@ const DialogAlert: React.FunctionComponent<AlertProp> = (props)=>{
             null
     )
 };
-const alert = (content:any)=>{
+const alert = (content:string)=>{
     const div = document.createElement('div');
     document.body.append(div);
     const dom  = <DialogAlert visible={true} onClose={()=>{
@@ -74,8 +74,34 @@ const alert = (content:any)=>{
 
     ReactDom.render(dom,div)
 };
+
+const confirm = (content:string, yes?:()=>void , no?:()=>void )=>{
+    const div = document.createElement('div');
+    document.body.append(div);
+    const onYes = ()=>{
+        ReactDom.render(React.cloneElement(dom),div);
+        ReactDom.unmountComponentAtNode(div);
+        div.remove();
+        yes && yes()
+    };
+    const onNo = ()=>{
+        ReactDom.render(React.cloneElement(dom),div);
+        ReactDom.unmountComponentAtNode(div);
+        div.remove();
+        no && no()
+    };
+    const dom = <Dialog
+                    visible={true}
+                    footer={[
+                        <button onClick={onYes}>确定</button>,
+                        <button onClick={onNo}>取消</button>]}
+                    onClose={onNo}>
+                    {content}
+                </Dialog>;
+    ReactDom.render(dom,div)
+};
 Dialog.defaultProps = {
     maskClosable: true
 };
 export default Dialog
-export {alert}
+export {alert, confirm}
