@@ -1,4 +1,4 @@
-import React, {Fragment, ReactElement, ReactFragment, ReactNode} from "react";
+import React, {Fragment, ReactElement, ReactNode} from "react";
 import ReactDom from 'react-dom';
 import Icon from "../icon/icon";
 import './dialog.scss'
@@ -74,51 +74,33 @@ const alert = (content:string)=>{
 
     ReactDom.render(dom,div)
 };
-
-const confirm = (content:string, yes?:()=>void , no?:()=>void )=>{
+const modal = (content:string|ReactNode,footer?:Array<ReactElement>,afterClose?:()=>void)=>{
     const div = document.createElement('div');
     document.body.append(div);
-    const onYes = ()=>{
+    const close = ()=>{
         ReactDom.render(React.cloneElement(dom),div);
         ReactDom.unmountComponentAtNode(div);
         div.remove();
+    };
+    const dom =   <Dialog visible={true} footer={footer} onClose={()=>{close();afterClose&&afterClose()}}>
+                    {content}
+                 </Dialog>;
+
+    ReactDom.render(dom,div);
+    return close;
+};
+const confirm = (content:string,yes?:()=>void, no?:()=>void)=>{
+    const onYes = ()=>{
+        close();
         yes && yes()
     };
     const onNo = ()=>{
-        ReactDom.render(React.cloneElement(dom),div);
-        ReactDom.unmountComponentAtNode(div);
-        div.remove();
+        close();
         no && no()
     };
-    const dom = <Dialog
-                    visible={true}
-                    footer={[
-                        <button onClick={onYes}>确定</button>,
-                        <button onClick={onNo}>取消</button>]}
-                    onClose={onNo}>
-                    {content}
-                </Dialog>;
-    ReactDom.render(dom,div)
-};
-
-const modal  = (content: ReactNode|ReactFragment) =>{
-    const div = document.createElement('div');
-    document.body.append(div);
-
-    const close = () => {
-        ReactDom.render(React.cloneElement(dom), div);
-        ReactDom.unmountComponentAtNode(div);
-        div.remove();
-    };
-
-    const dom =
-        <Dialog visible={true} onClose={()=>close()}>
-            {content}
-        </Dialog>;
-
-
-    ReactDom.render(dom,div);
-    return close
+    const footer = [<button onClick={onYes}>确定</button>,
+                    <button onClick={onNo}>取消</button>];
+    const close = modal(content,footer,no)
 };
 Dialog.defaultProps = {
     maskClosable: true
