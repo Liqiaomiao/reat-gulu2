@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Dialog, {alert, confirm} from "./dialog";
+import Dialog, {alert, confirm, modal} from "./dialog";
 
 export default function () {
     const [x, setX]  = useState(false);
@@ -21,7 +21,16 @@ export default function () {
                 <button onClick={()=>{confirm('are you sure', ()=>{console.log('yes')},
                     ()=>{console.log('no')})
                 }}>confirm</button>
+                <button onClick={()=>{
+                   const close  = modal(
+                        <div>
+                            <span>hello</span>
+                            <button onClick={()=>{console.log('close');close()}}>close</button>
+                        </div>
+                    )
+                }}>modal</button>
             </div>
+
         </div>
 
     )

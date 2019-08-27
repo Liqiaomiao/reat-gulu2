@@ -1,11 +1,11 @@
-import React, {Fragment, ReactElement} from "react";
+import React, {Fragment, ReactElement, ReactFragment, ReactNode} from "react";
 import ReactDom from 'react-dom';
 import Icon from "../icon/icon";
 import './dialog.scss'
 import {scopedClassMaker} from "../utils/class";
 interface Props {
     visible: boolean;
-    footer: Array<ReactElement>;
+    footer?: Array<ReactElement>;
     onClose: React.MouseEventHandler;
     maskClosable?: boolean
 }
@@ -37,7 +37,7 @@ const Dialog: React.FunctionComponent<Props> = (props) =>{
                     }
                 </main>
                 <footer className={sc('footer')}>
-                    {props.footer.map((item,index)=> React.cloneElement(item,{key: index}))}
+                    {props.footer && props.footer.map((item,index)=> React.cloneElement(item,{key: index}))}
                 </footer>
 
             </div>
@@ -100,8 +100,28 @@ const confirm = (content:string, yes?:()=>void , no?:()=>void )=>{
                 </Dialog>;
     ReactDom.render(dom,div)
 };
+
+const modal  = (content: ReactNode|ReactFragment) =>{
+    const div = document.createElement('div');
+    document.body.append(div);
+
+    const close = () => {
+        ReactDom.render(React.cloneElement(dom), div);
+        ReactDom.unmountComponentAtNode(div);
+        div.remove();
+    };
+
+    const dom =
+        <Dialog visible={true} onClose={()=>close()}>
+            {content}
+        </Dialog>;
+
+
+    ReactDom.render(dom,div);
+    return close
+};
 Dialog.defaultProps = {
     maskClosable: true
 };
 export default Dialog
-export {alert, confirm}
+export {alert, confirm, modal}
