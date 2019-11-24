@@ -1,6 +1,6 @@
 const path = require('path');
 module.exports = {
-    entry: './playground/useContext.tsx',
+    entry: './example.tsx',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx']
     },
