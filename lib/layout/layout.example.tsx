@@ -8,10 +8,27 @@ export default function(){
     return (
         <div>
             <div>第一个例子</div>
-            <Layout style={{'color':'red'}}>
+            <Layout className={'mylayout'} style={{height:'500px'}}>
                 <Header/>
-                <Aside/>
                 <Content/>
+                <Footer/>
+            </Layout>
+            <div>第二个例子</div>
+            <Layout className={'mylayout'} style={{height:'500px'}}>
+                <Header/>
+                <Layout className={'mylayout'} style={{height:'500px'}}>
+                    <Aside/>
+                    <Content/>
+                </Layout>
+                <Footer/>
+            </Layout>
+            <div>第三个例子</div>
+            <Layout className={'mylayout'} style={{height:'500px'}}>
+                <Header/>
+                <Layout className={'mylayout'} style={{height:'500px'}}>
+                    <Content/>
+                    <Aside/>
+                </Layout>
                 <Footer/>
             </Layout>
         </div>
