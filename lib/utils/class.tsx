@@ -1,8 +1,6 @@
 function scopedClassMaker(prefix:string) {
-    return function (...args: any[]) {
-        return [...args].filter(Boolean).map((item)=>{
-            return `${prefix}-${item}`
-        }).join(' ');
+    return function x(name?:string) {
+        return [prefix,name].filter(Boolean).join('-');
     }
 }
 export {scopedClassMaker}
