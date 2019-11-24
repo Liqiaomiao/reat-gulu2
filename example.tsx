@@ -5,7 +5,9 @@ import IconExample from './lib/icon/icon.example'
 import ButtonExample from './lib/button/button.example'
 import  App  from './playground/useClass'
 import  {default as Lisa}  from './playground/useFun'
-import Dialog from "./lib/dialog/dialog.example";
+import Dialog from "./lib/dialog/dialog.example"
+import Layout from "./lib/layout/layout.example"
+import UseClass from './playground/useFun2'
 ReactDom.render((
     <Router>
         <div>
@@ -14,6 +16,9 @@ ReactDom.render((
                     LiUI
                 </div>
             </header>
+            <div>
+                <UseClass></UseClass>
+            </div>
             <div>
                 <aside>
                     <h2>组件</h2>
@@ -33,6 +38,9 @@ ReactDom.render((
                         <li>
                             <Link to='/dialog'>dialog</Link>
                         </li>
+                        <li>
+                            <Link to='/layout'>layout</Link>
+                        </li>
                     </ul>
                 </aside>
                 <main>
@@ -41,6 +49,7 @@ ReactDom.render((
                     <Route path="/useclass" component={App}/>
                     <Route path="/useFun" component={Lisa}/>
                     <Route path="/dialog" component={Dialog}/>
+                    <Route path="/layout" component={Layout}/>
                 </main>
             </div>
         </div>
