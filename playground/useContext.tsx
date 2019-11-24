@@ -15,7 +15,7 @@ function App(){
 }
 
 function Child() {
-    const {theme,setTheme} = React.useContext(themeContext)
+    const {theme,setTheme} = React.useContext(themeContext) // 通过themeContext.Provider 提供的value返回的值
     return (
         <button onClick={() => setTheme('blue')} style={{'background':theme}}>blue</button>
     )
