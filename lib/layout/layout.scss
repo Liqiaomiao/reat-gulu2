@@ -7,6 +7,13 @@
     flex-grow: 1;
     border: 1px solid green;
   }
+  &.hasAside{
+    flex-direction: row;
+    .gulu-layout{
+      flex-grow: 1;
+      flex-direction: column;
+    }
+  }
   & &{
     flex-direction: row;
   }

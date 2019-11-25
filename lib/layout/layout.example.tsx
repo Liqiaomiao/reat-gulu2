@@ -31,6 +31,15 @@ export default function(){
                 </Layout>
                 <Footer/>
             </Layout>
+            <div>第四个例子</div>
+            <Layout className={'mylayout'} style={{height:'500px'}}>
+                <Aside/>
+                <Layout className={'mylayout'} style={{height:'500px'}}>
+                    <Header/>
+                    <Content/>
+                    <Footer/>
+                </Layout>
+            </Layout>
         </div>
 
 
