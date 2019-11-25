@@ -7,15 +7,10 @@ interface Props extends React.HTMLAttributes<HTMLElement>{
 
 }
 const Layout: React.FunctionComponent<Props> = (props) => {
-    let {className,...rest} = props;
-    let hasAside = false;
-    (props.children as Array<ReactElement>).map(node=>{
-        if(node.type === Aside){
-            hasAside = true
-        }
-    })
+    const {className,...rest} = props;
+    const hasAside = (props.children as Array<ReactElement>).reduce((prev,node)=> prev || node.type === Aside ,false);
     return (
-        <div className={sc('',{extra:[className, hasAside && 'hasAside'].join(' ')})} {...rest}>
+        <div className={sc('',{extra:[className, hasAside ? 'hasAside':''].join(' ')})} {...rest}>
             {props.children}
         </div>
     )
