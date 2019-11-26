@@ -2,7 +2,7 @@ import React, {Fragment, ReactElement, ReactNode} from "react";
 import ReactDom from 'react-dom';
 import Icon from "../icon/icon";
 import './dialog.scss'
-import {scopedClassMaker} from "../utils/class";
+import {scopedClassMaker} from "../../lib/helpers/classes"
 interface Props {
     visible: boolean;
     footer?: Array<ReactElement>;

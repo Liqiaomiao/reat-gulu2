@@ -1,5 +1,5 @@
 import React, {ReactElement} from 'react';
-import {scopedClassMaker} from "../utils/class";
+import {scopedClassMaker} from "../../lib/helpers/classes"
 import './layout.scss'
 import Aside from "./aside";
 const sc = scopedClassMaker('gulu-layout');

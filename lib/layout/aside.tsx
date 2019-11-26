@@ -1,5 +1,5 @@
 import React from 'react';
-import {scopedClassMaker} from "../utils/class";
+import {scopedClassMaker} from "../../lib/helpers/classes"
 const sc = scopedClassMaker('gulu-layout')
 interface Props extends React.HTMLAttributes<HTMLElement>{
 
