@@ -8,7 +8,8 @@ interface Props extends React.HTMLAttributes<HTMLElement>{
 }
 const Layout: React.FunctionComponent<Props> = (props) => {
     const {className,...rest} = props;
-    const hasAside = (props.children as Array<ReactElement>).reduce((prev,node)=> prev || node.type === Aside ,false);
+    const childern = props.children as Array<ReactElement>
+    const hasAside = childern.length > 0  && childern.reduce((prev,node)=> prev || node.type === Aside ,false);
     return (
         <div className={sc({'':true,hasAside},{extra:className})} {...rest}>
             {props.children}
