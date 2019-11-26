@@ -1,4 +1,4 @@
-import classes from '../classes'
+import classes,{scopedClassMaker} from '../classes'
 describe('classes',()=>{
    it('接受 1 个class',()=>{
        const result = classes('a');
@@ -22,3 +22,12 @@ describe('classes',()=>{
     })
 
 });
+describe('scopedClassMaker',()=>{
+    it('x',()=>{
+        const sc = scopedClassMaker('gulu-ui')
+        expect(sc('')).toEqual('gulu-ui')
+        expect(sc('layout')).toEqual('gulu-ui-layout')
+        expect(sc({'active':true,'current':false})).toEqual('gulu-ui-active')
+        expect(sc({'active':true,'current':true},{extra:'hello'})).toEqual('gulu-ui-active gulu-ui-current hello')
+    })
+})
