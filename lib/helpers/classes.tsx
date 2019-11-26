@@ -23,10 +23,9 @@ function scopedClassMaker(prefix: string) {
             .filter(kv => kv[1] === true) // [[active,true],[current,true]]
             .map(kv => kv[0])
             .map(name => [prefix, name].filter(Boolean).join('-'))// [gulu-layout-active,gulu-layout-curren
+            .concat(options && options.extra || [])
             .join(' ')
-        return (options && options.extra) ?
-            [scoped, options && options.extra].filter(Boolean).join(' '):
-            scoped
+        return scoped
     }
 }
 
