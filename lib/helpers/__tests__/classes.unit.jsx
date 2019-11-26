@@ -23,7 +23,7 @@ describe('classes',()=>{
 
 });
 describe('scopedClassMaker',()=>{
-    it('x',()=>{
+    it('接受字符串或对象',()=>{
         const sc = scopedClassMaker('gulu-ui')
         expect(sc('')).toEqual('gulu-ui')
         expect(sc('layout')).toEqual('gulu-ui-layout')
