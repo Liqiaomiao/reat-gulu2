@@ -9,6 +9,7 @@
   }
   &.gulu-layout-hasAside{
     flex-direction: row;
+    flex-grow: 1;
     .gulu-layout{
       flex-grow: 1;
       flex-direction: column;
