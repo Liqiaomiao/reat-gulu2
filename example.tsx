@@ -7,17 +7,18 @@ import Dialog from "./lib/dialog/dialog.example"
 import LayoutExample from './lib/layout/layout.example'
 import {Aside, Header, Layout, Content} from "./lib/layout/layout"
 import './example.scss'
+const logo = require('./logo012.png')
 ReactDom.render((
         <Router>
-            <Layout className={'page'}>
-                <Header>
+            <Layout className={'site-page'}>
+                <Header className='site-header'>
                     <div className="logo">
-                        LiUI
+                        <img src={logo.default} alt="logo" height='60'/>
                     </div>
                 </Header>
                 <Layout>
-                    <Aside>
-                        <h2>组件</h2>
+                    <Aside className='site-aside'>
+                        <h2>Gui</h2>
                         <ul>
                             <li>
                                 <Link to='/icon'>Icon</Link>
@@ -33,7 +34,7 @@ ReactDom.render((
                             </li>
                         </ul>
                     </Aside>
-                    <Content>
+                    <Content className='site-content'>
                         <main>
                             <Route path="/icon" component={IconExample}/>
                             <Route path="/button" component={ButtonExample}/>

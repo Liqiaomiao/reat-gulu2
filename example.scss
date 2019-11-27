@@ -2,6 +2,41 @@
 *::after{box-sizing: border-box}
 *::before{box-sizing: border-box}
 h1,h2,h3,h4,h5,h6{font-weight: normal}
-.page,#root,body,html{
+ul,li{list-style: none}
+a{text-decoration: none}
+.site-page,#root,body,html{
   height: 100%;
+}
+.site-header{
+  position: relative;
+  z-index: 10;
+  max-width: 100%;
+  background: #fff;
+  box-shadow: 0 2px 8px #f0f1f2;
+  height: 63px;
+  display: flex;
+  align-items: center;
+  .logo{
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    font-size: 18px;
+    padding-top: 20px;
+  }
+}
+.site-aside{
+  border-right: 1px solid #e8e8e8;
+  padding: 20px;
+  min-width: 260px;
+  li{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    a{color: #314659;}
+  }
+
+}
+.site-content{
+  display:flex;
+  justify-content: center;
 }
