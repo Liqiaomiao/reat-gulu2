@@ -1,5 +1,5 @@
-import React from 'react'
-import ReactDom from 'react-dom'
+import * as React from 'react'
+import * as ReactDom from 'react-dom'
 import {HashRouter as Router, Route, NavLink} from "react-router-dom";
 import IconExample from './lib/icon/icon.example'
 import ButtonExample from './lib/button/button.example'
@@ -7,6 +7,7 @@ import Dialog from "./lib/dialog/dialog.example"
 import LayoutExample from './lib/layout/layout.example'
 import {Aside, Header, Layout, Content} from "./lib/layout/layout"
 import './example.scss'
+import FormExample from "./lib/form/form.example";
 const logo = require('./logo012.png')
 ReactDom.render((
         <Router>
@@ -27,10 +28,13 @@ ReactDom.render((
                                 <NavLink to='/button'>Button</NavLink>
                             </li>
                             <li>
-                                <NavLink to='/dialog'>dialog</NavLink>
+                                <NavLink to='/dialog'>Dialog</NavLink>
                             </li>
                             <li>
-                                <NavLink to='/layout'>layout</NavLink>
+                                <NavLink to='/layout'>Layout</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/form">Form</NavLink>
                             </li>
                         </ul>
                     </Aside>
@@ -40,6 +44,7 @@ ReactDom.render((
                             <Route path="/button" component={ButtonExample}/>
                             <Route path="/dialog" component={Dialog}/>
                             <Route path="/layout" component={LayoutExample}/>
+                            <Route path="/form" component={FormExample}/>
                         </main>
                     </Content>
                 </Layout>
