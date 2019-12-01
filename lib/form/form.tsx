@@ -15,8 +15,8 @@ const Form:React.FunctionComponent<Props> = (props)=>{
         props.onSubmit(e)
     }
     const formData = props.value
-    const onchange=(a:string,b:string)=>{
-       props.onChange({...formData,[a]:b})
+    const onchange=(a:string,e:React.ChangeEvent<HTMLInputElement>)=>{
+       props.onChange({...formData,[a]:e.target.value})
     }
     return (
         <form onSubmit={onsubmit}>
@@ -26,7 +26,7 @@ const Form:React.FunctionComponent<Props> = (props)=>{
                     <input type={item.input.type}
                            name={item.name}
                            value={formData[item.name]}
-                           onChange={(e:React.ChangeEvent<HTMLInputElement>)=>onchange(item.name,e.target.value)}/>
+                           onChange={onchange.bind(null,item.name)}/>
                 </div>
             ))}
             <div>
