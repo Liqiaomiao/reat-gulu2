@@ -11,7 +11,7 @@ interface FormRule {
 type FormRules = Array<FormRule>
 
 interface ErrorValue {
-    [K: string]: any
+    [K: string]: string[]
 }
 
 const isEmpty = (whatever: any) => {
@@ -33,7 +33,6 @@ const Validator = (formData: FormValue, rules: FormRules): ErrorValue => {
         if (isEmpty(value) && rule.required) {
             addRule(rule.key, `${rule.key} is required`)
         }
-        console.log(isEmpty(value), rule, value.length, rule.maxLength);
         if (!isEmpty(value) && rule.minLength && value.length < rule.minLength) {
             addRule(rule.key, `${rule.key} at least ${rule.minLength} words`)
         }
