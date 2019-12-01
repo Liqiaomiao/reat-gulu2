@@ -17,7 +17,9 @@ interface ErrorValue {
 const isEmpty = (whatever: any) => {
     return whatever === '' || whatever === undefined || whatever === null
 }
-
+export const noError = (errors:ErrorValue) => {
+    return Object.keys(errors).length === 0
+}
 const Validator = (formData: FormValue, rules: FormRules): ErrorValue => {
     let errors: any = {}
     const addRule = (key: string, message: string) => {

@@ -1,6 +1,6 @@
 import React, {useState, Fragment} from "react";
 import Form, {FormValue} from "./form";
-import Validator from "./validator";
+import Validator, {noError} from "./validator";
 
 const FormExample: React.FunctionComponent = () => {
     const [formData, setFormData] = useState<FormValue>({
@@ -19,7 +19,10 @@ const FormExample: React.FunctionComponent = () => {
             {key: 'password', minLength: 3, pattern: /[A-Za-z0-9]+/}
         ]
         const errors = Validator(formData, formRules)
-        setErrors(errors)
+        if(!noError(errors)){
+            setErrors(errors)
+        }
+
     }
     return (
         <div>
