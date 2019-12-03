@@ -1,0 +1,14 @@
+.fui-form{
+  &-td{
+    padding: 12px 0;
+  }
+  &-row:first-child &-td{
+    padding-top: 0;
+  }
+  &-row:last-child &-td{
+    padding-bottom: 0;
+  }
+  &-td + &-td{
+    padding-left: 12px;
+  }
+}
