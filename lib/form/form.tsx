@@ -43,15 +43,18 @@ const Form: React.FunctionComponent<Props> = (props) => {
                                    onChange={onchange.bind(null, item.name)}/>
                             <div className='gulu-form-error-tip'>{props.errors[item.name]}</div>
                         </td>
-
-
                     </tr>
+
                 ))}
+                    <tr>
+                        <td className='gulu-form-td'></td>
+                        <td className='gulu-form-td'>
+                            {props.buttons}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
-            <div>
-                {props.buttons}
-            </div>
+
         </form>
     )
 }
