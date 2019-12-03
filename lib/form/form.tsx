@@ -30,18 +30,18 @@ const Form: React.FunctionComponent<Props> = (props) => {
             <table>
                 <tbody>
                 {props.fields.map(item => (
-                    <tr key={item.name} className={classes('fui-form-row')}>
-                        <td className='fui-form-td'>
-                            <span className="fui-form-label">
+                    <tr key={item.name} className={classes('gulu-form-row')}>
+                        <td className='gulu-form-td'>
+                            <span className="gulu-form-label">
                                  {item.label}
                             </span>
                         </td>
-                        <td className='fui-form-td'>
+                        <td className='gulu-form-td'>
                             <Input type={item.input.type}
                                    name={item.name}
                                    value={formData[item.name]}
                                    onChange={onchange.bind(null, item.name)}/>
-                            <div className='fui-form-error-tip'>{props.errors[item.name]}</div>
+                            <div className='gulu-form-error-tip'>{props.errors[item.name]}</div>
                         </td>
 
 
