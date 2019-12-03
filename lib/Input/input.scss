@@ -1,5 +1,5 @@
 .gulu-input {
-  border: 1px solid #ddd;
+  border: 1px solid #d9d9d9;
   line-height: 22px;
   padding: 4px 8px;
   border-radius: 4px;
@@ -8,6 +8,7 @@
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px fade_out(blue, .5);
+    border: 1px solid #40a9ff;
+    box-shadow: 0 0 10px 2px fade_out(#40a9ff, .7);
   }
 }
