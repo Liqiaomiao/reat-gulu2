@@ -8,12 +8,13 @@ export interface FormValue {
 }
 
 interface Props {
-    value: FormValue,
-    fields: Array<{ name: string, label: string, input: { type: string } }>,
-    buttons: ReactFragment,
-    onSubmit: React.FormEventHandler<HTMLFormElement>,
-    onChange: (value: FormValue) => void,
-    errors: { [K: string]: string[] }
+    value: FormValue;
+    fields: Array<{ name: string, label: string, input: { type: string } }>;
+    buttons: ReactFragment;
+    onSubmit: React.FormEventHandler<HTMLFormElement>;
+    onChange: (value: FormValue) => void;
+    errors: { [K: string]: string[] };
+    errorsMode?: 'first' | 'all'
 }
 
 const Form: React.FunctionComponent<Props> = (props) => {
@@ -36,26 +37,38 @@ const Form: React.FunctionComponent<Props> = (props) => {
                                  {item.label}
                             </span>
                         </td>
-                        <td className='gulu-form-td'>
+                        <td className={`gulu-form-td ${props.errors[item.name] ? 'gulu-form-td-error' : ''}`}>
                             <Input type={item.input.type}
                                    name={item.name}
                                    value={formData[item.name]}
                                    onChange={onchange.bind(null, item.name)}/>
-                            <div className='gulu-form-error-tip'>{props.errors[item.name]}</div>
+                            <div className='gulu-form-error-tip'>
+                                {props.errors[item.name] ?
+                                    (
+                                        props.errorsMode === 'first' ?
+                                            props.errors[item.name][0] :
+                                            props.errors[item.name].join(',')
+                                    ) :
+                                    <span>&nbsp;</span>
+                                }
+                            </div>
                         </td>
                     </tr>
 
                 ))}
-                    <tr>
-                        <td className='gulu-form-td'></td>
-                        <td className='gulu-form-td'>
-                            {props.buttons}
-                        </td>
-                    </tr>
+                <tr>
+                    <td className='gulu-form-td'></td>
+                    <td className='gulu-form-td'>
+                        {props.buttons}
+                    </td>
+                </tr>
                 </tbody>
             </table>
 
         </form>
     )
+}
+Form.defaultProps = {
+    errorsMode: 'first'
 }
 export default Form

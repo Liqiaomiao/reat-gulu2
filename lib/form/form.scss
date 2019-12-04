@@ -1,11 +1,29 @@
-.gulu-form{
-  &-td{
-    padding-bottom: 32px;
+.gulu-form {
+  &-td {
+    padding-bottom: 8px;
+    vertical-align: top;
   }
-  &-row:last-child &-td{
+
+  &-row:last-child &-td {
     padding-bottom: 0;
   }
-  &-td + &-td{
+
+  &-td + &-td {
     padding-left: 12px;
+  }
+
+  &-label {
+    line-height: 32px;
+  }
+
+  &-td-error {
+    .gulu-input {
+      border-color: #f5222d;
+    }
+  }
+
+  &-error-tip {
+    color: #f5222d;
+    font-size: .8rem;
   }
 }
