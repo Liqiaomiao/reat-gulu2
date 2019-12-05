@@ -26,7 +26,7 @@ export const noError = (errors: ErrorValue) => {
 }
 const Validator = (formData: FormValue, rules: FormRules): ErrorValue => {
     let errors: any = {}
-    const addRule = (key: string, message: string) => {
+    const addRule = (key: string, message: string | Promise<void>) => {
         if (!errors[key]) {
             errors[key] = []
         }
@@ -37,7 +37,8 @@ const Validator = (formData: FormValue, rules: FormRules): ErrorValue => {
     rules.map(rule => {
         const value = formData[rule.key]
         if (rule.validator) {
-            rule.validator.validate(value)
+            const result = rule.validator.validate(value)
+            addRule(rule.key, result)
         }
         if (isEmpty(value) && rule.required) {
             addRule(rule.key, `${rule.key} is required`)
@@ -52,6 +53,20 @@ const Validator = (formData: FormValue, rules: FormRules): ErrorValue => {
             addRule(rule.key, `invalid pattern`)
         }
     })
+    console.log(flat(Object.values(errors)));
     return errors
 }
+
+function flat(array: Array<any>) {
+    const result = []
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] instanceof Array) {
+            result.push(...array[i])
+        } else {
+            result.push(array[i])
+        }
+    }
+    return result
+}
+
 export default Validator
