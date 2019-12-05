@@ -24,7 +24,7 @@ const isEmpty = (whatever: any) => {
 export const noError = (errors: ErrorValue) => {
     return Object.keys(errors).length === 0
 }
-const Validator = (formData: FormValue, rules: FormRules): ErrorValue => {
+const Validator = (formData: FormValue, rules: FormRules, callback:(errors:ErrorValue)=>void): void => {
     let errors: any = {}
     const addRule = (key: string, message: string | Promise<void>) => {
         if (!errors[key]) {
@@ -53,8 +53,13 @@ const Validator = (formData: FormValue, rules: FormRules): ErrorValue => {
             addRule(rule.key, `invalid pattern`)
         }
     })
-    console.log(flat(Object.values(errors)));
-    return errors
+    Promise.all(flat(Object.values(errors)))
+        .then(() => {
+                callback(errors)
+            },
+            () => {
+                callback(errors)
+            })
 }
 
 function flat(array: Array<any>) {
