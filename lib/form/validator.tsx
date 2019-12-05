@@ -6,6 +6,10 @@ interface FormRule {
     minLength?: number;
     maxLength?: number;
     pattern?: RegExp;
+    validator?: {
+        name: string,
+        validate: (value: string) => Promise<void>
+    }
 }
 
 type FormRules = Array<FormRule>
@@ -17,7 +21,7 @@ interface ErrorValue {
 const isEmpty = (whatever: any) => {
     return whatever === '' || whatever === undefined || whatever === null
 }
-export const noError = (errors:ErrorValue) => {
+export const noError = (errors: ErrorValue) => {
     return Object.keys(errors).length === 0
 }
 const Validator = (formData: FormValue, rules: FormRules): ErrorValue => {
@@ -32,6 +36,9 @@ const Validator = (formData: FormValue, rules: FormRules): ErrorValue => {
     }
     rules.map(rule => {
         const value = formData[rule.key]
+        if (rule.validator) {
+            rule.validator.validate(value)
+        }
         if (isEmpty(value) && rule.required) {
             addRule(rule.key, `${rule.key} is required`)
         }
