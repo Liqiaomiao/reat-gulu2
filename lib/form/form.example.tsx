@@ -31,7 +31,7 @@ const FormExample: React.FunctionComponent = () => {
             {key: 'username', minLength: 3, maxLength: 5},
             {
                 key: 'username', validator: {
-                    name: 'unique',
+                    name: 'username has existed',
                     validate(username: string) {
                         return new Promise<void>((resolve, reject) => {
                             checkUsername(username, resolve, reject)

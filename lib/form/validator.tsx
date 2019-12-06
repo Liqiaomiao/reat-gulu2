@@ -43,7 +43,7 @@ const Validator = (formData: FormValue, rules: FormRules, callback: (errors: Err
         const value = formData[rule.key]
         if (rule.validator) {
             const promise = rule.validator.validate(value)
-            addRule(rule.key, {message: 'username already existed', promise})
+            addRule(rule.key, {message: rule.validator.name, promise})
         }
         if (isEmpty(value) && rule.required) {
             addRule(rule.key, {message: `${rule.key} is required`})
@@ -61,18 +61,13 @@ const Validator = (formData: FormValue, rules: FormRules, callback: (errors: Err
     let promiseList = flat(Object.values(errors))
         .filter(item => item.promise)
         .map(item => item.promise)
-    let result = fromEntries(Object.keys(errors)
-        .map(key =>
-            // errors[key] [{message:'',promise}]
-            [key, errors[key].map((item: ErrorInfo) => item.message)]
-        ))
-    Promise.all(promiseList)
-        .then(() => {
-                callback(result)
-            },
-            () => {
-                callback(result)
-            })
+    Promise.all(promiseList).finally(()=>{
+        callback(fromEntries(Object.keys(errors)
+            .map(key =>
+                // errors[key] [{message:'',promise}]
+                [key, errors[key].map((item: ErrorInfo) => item.message)]
+            )))
+    })
 }
 
 function flat(array: Array<any>) {
