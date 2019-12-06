@@ -18,47 +18,60 @@ interface ErrorValue {
     [K: string]: string[]
 }
 
+interface ErrorInfo {
+    message: string;
+    promise?: Promise<void>
+}
+
 const isEmpty = (whatever: any) => {
     return whatever === '' || whatever === undefined || whatever === null
 }
 export const noError = (errors: ErrorValue) => {
     return Object.keys(errors).length === 0
 }
-const Validator = (formData: FormValue, rules: FormRules, callback:(errors:ErrorValue)=>void): void => {
+const Validator = (formData: FormValue, rules: FormRules, callback: (errors: ErrorValue) => void): void => {
     let errors: any = {}
-    const addRule = (key: string, message: string | Promise<void>) => {
+    const addRule = (key: string, errorInfo: ErrorInfo) => {
         if (!errors[key]) {
             errors[key] = []
         }
-        errors[key].push(message)
+        errors[key].push(errorInfo)
 
 
     }
     rules.map(rule => {
         const value = formData[rule.key]
         if (rule.validator) {
-            const result = rule.validator.validate(value)
-            addRule(rule.key, result)
+            const promise = rule.validator.validate(value)
+            addRule(rule.key, {message: 'username already existed', promise})
         }
         if (isEmpty(value) && rule.required) {
-            addRule(rule.key, `${rule.key} is required`)
+            addRule(rule.key, {message: `${rule.key} is required`})
         }
         if (!isEmpty(value) && rule.minLength && value.length < rule.minLength) {
-            addRule(rule.key, `${rule.key} at least ${rule.minLength} words`)
+            addRule(rule.key, {message: `${rule.key} at least ${rule.minLength} words`})
         }
         if (!isEmpty(value) && rule.maxLength && value.length > rule.maxLength) {
-            addRule(rule.key, `${rule.key} shouldn't more than ${rule.maxLength} words`)
+            addRule(rule.key, {message: `${rule.key} shouldn't more than ${rule.maxLength} words`})
         }
         if (rule.pattern && !(rule.pattern.test(value))) {
-            addRule(rule.key, `invalid pattern`)
+            addRule(rule.key, {message: `invalid pattern`})
         }
     })
-    Promise.all(flat(Object.values(errors)))
+    let promiseList = flat(Object.values(errors))
+        .filter(item => item.promise)
+        .map(item => item.promise)
+    let result = fromEntries(Object.keys(errors)
+        .map(key =>
+            // errors[key] [{message:'',promise}]
+            [key, errors[key].map((item: ErrorInfo) => item.message)]
+        ))
+    Promise.all(promiseList)
         .then(() => {
-                callback(errors)
+                callback(result)
             },
             () => {
-                callback(errors)
+                callback(result)
             })
 }
 
@@ -70,6 +83,14 @@ function flat(array: Array<any>) {
         } else {
             result.push(array[i])
         }
+    }
+    return result
+}
+
+function fromEntries(array: Array<[string, string[]]>) {
+    const result: ErrorValue = {};
+    for (var i = 0; i < array.length; i++) {
+        result[array[i][0]] = array[i][1]
     }
     return result
 }
