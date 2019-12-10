@@ -2,7 +2,7 @@ import React, { ReactFragment } from "react";
 import Input from "../Input/input";
 import classes from "../helpers/classes";
 import './form.scss'
-
+import { defaultProps } from 'prism-react-renderer';
 
 export interface FormValue {
     [T: string]: any
@@ -34,6 +34,7 @@ const Form: React.FunctionComponent<Props> = (props) => {
             maxLength: '太长',
             required: '必填'
         }
+        console.log('translate=======', message, props.translate(message))
         return props.translate && props.translate(message) || map[message] || '未知错误'
     }
     return (

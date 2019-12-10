@@ -58,7 +58,7 @@ const Validator = (formData: FormValue, rules: FormRules, callback: (errors: Err
     ))
     const newPromise = flattenErrors.map(([key, error]) =>
         (error instanceof Promise ? error : Promise.reject(error)) // 如果不是promise转成pormise => Promise.reject(error)
-            .then<[string, undefined], [string, string]>(() => {
+            .then(() => {
                 return [key, undefined]
             }, (reason: string) => {
                 return [key, reason]
@@ -71,13 +71,13 @@ const Validator = (formData: FormValue, rules: FormRules, callback: (errors: Err
 
 }
 
-function flat<T>(array: Array<T | T[]>) {
+function flat(array: Array<[string, string | undefined]>) {
     const result = []
     for (var i = 0; i < array.length; i++) {
         if (array[i] instanceof Array) {
-            result.push(...array[i] as T[])
+            result.push(...array[i])
         } else {
-            result.push(array[i] as T)
+            result.push(array[i])
         }
     }
     return result

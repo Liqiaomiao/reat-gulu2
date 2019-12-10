@@ -51,14 +51,14 @@ const Validator = (formData: FormValue, rules: FormRules, callback: (errors: Err
             addRule(rule.key, `pattern`)
         }
     })
-    const flattenErrors = flat(Object.keys(errors).map(key =>
+    const flattenErrors = flat(Object.keys(errors).map<[string, ErrorInfo][]>(key =>
         errors[key].map<[string, ErrorInfo]>((error) =>
             [key, error]
         )
     ))
     const newPromise = flattenErrors.map(([key, error]) =>
         (error instanceof Promise ? error : Promise.reject(error)) // 如果不是promise转成pormise => Promise.reject(error)
-            .then<[string, undefined], [string, string]>(() => {
+            .then(() => {
                 return [key, undefined]
             }, (reason: string) => {
                 return [key, reason]

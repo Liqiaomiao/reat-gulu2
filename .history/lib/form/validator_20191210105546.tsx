@@ -51,7 +51,7 @@ const Validator = (formData: FormValue, rules: FormRules, callback: (errors: Err
             addRule(rule.key, `pattern`)
         }
     })
-    const flattenErrors = flat(Object.keys(errors).map(key =>
+    const flattenErrors = flat(Object.keys(errors).map<[string, ErrorInfo][]>(key =>
         errors[key].map<[string, ErrorInfo]>((error) =>
             [key, error]
         )
