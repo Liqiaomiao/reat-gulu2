@@ -23,7 +23,7 @@ export const noError = (errors: ErrorValue) => {
     return Object.keys(errors).length === 0
 }
 const Validator = (formData: FormValue, rules: FormRules, callback: (errors: ErrorValue) => void): void => {
-    let errors: { [K: string]: ErrorInfo[] } = {}
+    let errors: any = {}
     const addRule = (key: string, errorInfo: ErrorInfo) => {
         if (!errors[key]) {
             errors[key] = []
@@ -52,7 +52,7 @@ const Validator = (formData: FormValue, rules: FormRules, callback: (errors: Err
         }
     })
     const flattenErrors = flat(Object.keys(errors).map(key =>
-        errors[key].map<[string, ErrorInfo]>((error) =>
+        errors[key].map((error: ErrorInfo) =>
             [key, error]
         )
     ))

@@ -52,7 +52,7 @@ const Validator = (formData: FormValue, rules: FormRules, callback: (errors: Err
         }
     })
     const flattenErrors = flat(Object.keys(errors).map(key =>
-        errors[key].map<[string, ErrorInfo]>((error) =>
+        errors[key].map((error) =>
             [key, error]
         )
     ))

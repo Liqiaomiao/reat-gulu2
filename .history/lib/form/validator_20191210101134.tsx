@@ -66,7 +66,7 @@ const Validator = (formData: FormValue, rules: FormRules, callback: (errors: Err
     )
 
     Promise.all(newPromise).then(results => {
-        callback(zip(results.filter(item => item[1])))
+        callback(zip(results.filter<[string, string]>(item => item[1])))
     })
 
 }

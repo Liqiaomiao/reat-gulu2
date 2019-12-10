@@ -23,7 +23,7 @@ export const noError = (errors: ErrorValue) => {
     return Object.keys(errors).length === 0
 }
 const Validator = (formData: FormValue, rules: FormRules, callback: (errors: ErrorValue) => void): void => {
-    let errors: { [K: string]: ErrorInfo[] } = {}
+    let errors: any = {}
     const addRule = (key: string, errorInfo: ErrorInfo) => {
         if (!errors[key]) {
             errors[key] = []
@@ -48,24 +48,26 @@ const Validator = (formData: FormValue, rules: FormRules, callback: (errors: Err
             addRule(rule.key, `maxLength`)
         }
         if (rule.pattern && !(rule.pattern.test(value))) {
-            addRule(rule.key, `pattern`)
+            addRule(rule.key, `invalid pattern`)
         }
     })
-    const flattenErrors = flat(Object.keys(errors).map(key =>
-        errors[key].map<[string, ErrorInfo]>((error) =>
-            [key, error]
-        )
-    ))
-    const newPromise = flattenErrors.map(([key, error]) =>
-        (error instanceof Promise ? error : Promise.reject(error)) // 如果不是promise转成pormise => Promise.reject(error)
-            .then(() => {
+    const newPromise = flat(Object.keys(errors).map(key =>
+        errors[key].map((error: ErrorInfo) => {
+            console.log('map', error)
+            return [key, error]
+        })
+    )).map(([key, error]) => {
+        return error instanceof Promise ?
+            error.then(() => {
                 return [key, undefined]
             }, (reason: string) => {
                 return [key, reason]
-            })
+            }) : [key, error]
+    }
     )
-
+    //  let promiseList = flat(Object.values(errors))
     Promise.all(newPromise).then(results => {
+        console.log('promise all', results)
         callback(zip(results.filter(item => item[1])))
     })
 
@@ -92,5 +94,13 @@ function zip(arr: Array<[string, string]>) {
     return result
 }
 
+//
+// function fromEntries(array: Array<[string, string[]]>) {
+//     const result: ErrorValue = {};
+//     for (var i = 0; i < array.length; i++) {
+//         result[array[i][0]] = array[i][1]
+//     }
+//     return result
+// }
 
 export default Validator

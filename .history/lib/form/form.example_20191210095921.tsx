@@ -52,8 +52,7 @@ const FormExample: React.FunctionComponent = () => {
     }
     const translateHandler = (message: string): string => {
         const map: { [K: string]: string } = {
-            unique: '该用户名已存在',
-            pattern: '格式有误'
+            unique: '该用户名已存在'
         }
         return map[message]
     }

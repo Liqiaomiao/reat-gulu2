@@ -44,16 +44,15 @@ const FormExample: React.FunctionComponent = () => {
         Validator(formData, formRules, (errors) => {
             if (!noError(errors)) {
                 setErrors(errors)
+
             }
-            console.log('errors', errors)
         })
 
 
     }
     const translateHandler = (message: string): string => {
         const map: { [K: string]: string } = {
-            unique: '该用户名已存在',
-            pattern: '格式有误'
+            unique: '该用户名已存在'
         }
         return map[message]
     }
