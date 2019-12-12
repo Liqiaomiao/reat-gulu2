@@ -56,6 +56,9 @@ a{text-decoration: none}
 .site-content{
   display:flex;
   padding: 20px;
+  main{
+    width: 100%;
+  }
   .code-toggle {
     padding: 5px 10px;
     text-align: center;
