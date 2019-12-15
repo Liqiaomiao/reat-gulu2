@@ -22,25 +22,26 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     const draggingRef = useRef<HTMLDivElement>(null)
     const tragging = useRef(false)
     const firstY = useRef(0)
-
-
+    const firstBar = useRef(0)
+    const setBarTop = (number: number) => {
+        if (number < 0) {return;}
+        const {current} = containerRef;
+        const scrollHeight = current!.scrollHeight;
+        const viewHeight = current!.getBoundingClientRect().height;
+        const maxBarTop = (scrollHeight - viewHeight) * viewHeight / scrollHeight;
+        if (number > maxBarTop) {return;}
+        _setBarTop(number);
+      };
     const handleOnMouseDown: React.MouseEventHandler = (e) => {
         tragging.current = true
         firstY.current = e.clientY
-
+        firstBar.current = barTop
     }
 
     const handleOnMouseMove = (e:MouseEvent) => {
-        if (tragging.current && tragging.current) {
+        if (tragging.current) {
             let delta = e.clientY - firstY.current
-            let { current } = containerRef
-            let scrollHeight = current!.scrollHeight
-            let viewHeight = current!.getBoundingClientRect().height
-            let maxx = (scrollHeight - viewHeight) * viewHeight / scrollHeight
-            if (delta < 0) { delta = 0 }
-            if (delta > maxx) { delta = maxx }
-            _setBarTop(delta)
-
+            setBarTop(firstBar.current+delta)
         }
     }
     const handleOnMouseUp: EventListener = () => {
