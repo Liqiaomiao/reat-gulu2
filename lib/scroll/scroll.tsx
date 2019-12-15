@@ -10,6 +10,7 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     let { children, ...rest } = props
     let [barHeight, setBarHeight] = useState(0)
     let [barTop, _setBarTop] = useState(0)
+    let [translateY, _setTranslateY] = useState(0);
     const onscroll: React.UIEventHandler = (e) => {
         let { current } = containerRef
         let scrollHeight = current!.scrollHeight
@@ -23,40 +24,35 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     const tragging = useRef(false)
     const firstY = useRef(0)
     const firstBarTop = useRef(0)
-
+   
     const setBarTop = (number: number) => {
-        if (number < 0) { return; }
-        const { current } = containerRef;
+        if (number < 0) {return;}
+        const {current} = containerRef;
         const scrollHeight = current!.scrollHeight;
         const viewHeight = current!.getBoundingClientRect().height;
         const maxBarTop = (scrollHeight - viewHeight) * viewHeight / scrollHeight;
-        if (number > maxBarTop) { return; }
+        if (number > maxBarTop) {return;}
         _setBarTop(number);
-    };
+      };
     const handleOnMouseDown: React.MouseEventHandler = (e) => {
         tragging.current = true
         firstY.current = e.clientY
         firstBarTop.current = barTop
     }
 
-    const handleOnMouseMove = (e: MouseEvent) => {
+    const handleOnMouseMove = (e:MouseEvent) => {
         if (tragging.current) {
             let delta = e.clientY - firstY.current
-            let newBarTop = firstBarTop.current + delta
+            let newBarTop = firstBarTop.current+delta
             setBarTop(newBarTop)
             let { current } = containerRef
             let scrollHeight = current!.scrollHeight
             let viewHeight = current!.getBoundingClientRect().height
-            containerRef.current!.scrollTop = newBarTop * scrollHeight / viewHeight
+            containerRef.current!.scrollTop = newBarTop*scrollHeight/viewHeight
         }
     }
     const handleOnMouseUp: EventListener = () => {
         tragging.current = false
-    }
-    const handleOnSelect = (e: Event) => {
-        if (tragging.current) {
-            e.preventDefault()
-        }
     }
     useEffect(() => { // mounted
         let { current } = containerRef
@@ -65,18 +61,12 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
         setBarHeight(viewHeight * viewHeight / scrollHeight)
         document.addEventListener('mouseup', handleOnMouseUp)
         document.addEventListener('mousemove', handleOnMouseMove)
-        document.addEventListener('selectstart', handleOnSelect)
-        return () => { // destory
-            document.removeEventListener('mouseup', handleOnMouseUp)
-            document.removeEventListener('mousemove', handleOnMouseMove)
-            document.removeEventListener('selectstart', handleOnSelect)
-        }
     }, [])
 
     return (
         <div className={'gui-scroll'} {...rest}>
             <div className={'gui-scroll-inner'}
-                style={{ 'right': scrollbarwidth() }}
+                style={{ 'right': scrollbarwidth()}}
                 ref={containerRef}
                 onScroll={onscroll}
             >
