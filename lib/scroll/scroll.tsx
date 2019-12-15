@@ -10,6 +10,7 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     let { children, ...rest } = props
     let [barHeight, setBarHeight] = useState(0)
     let [barTop, _setBarTop] = useState(0)
+    let [translateY, _setTranslateY] = useState(0);
     const onscroll: React.UIEventHandler = (e) => {
         let { current } = containerRef
         let scrollHeight = current!.scrollHeight
@@ -22,7 +23,8 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     const draggingRef = useRef<HTMLDivElement>(null)
     const tragging = useRef(false)
     const firstY = useRef(0)
-    const firstBar = useRef(0)
+    const firstBarTop = useRef(0)
+   
     const setBarTop = (number: number) => {
         if (number < 0) {return;}
         const {current} = containerRef;
@@ -35,13 +37,18 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     const handleOnMouseDown: React.MouseEventHandler = (e) => {
         tragging.current = true
         firstY.current = e.clientY
-        firstBar.current = barTop
+        firstBarTop.current = barTop
     }
 
     const handleOnMouseMove = (e:MouseEvent) => {
         if (tragging.current) {
             let delta = e.clientY - firstY.current
-            setBarTop(firstBar.current+delta)
+            let newBarTop = firstBarTop.current+delta
+            setBarTop(newBarTop)
+            let { current } = containerRef
+            let scrollHeight = current!.scrollHeight
+            let viewHeight = current!.getBoundingClientRect().height
+            containerRef.current!.scrollTop = newBarTop*scrollHeight/viewHeight
         }
     }
     const handleOnMouseUp: EventListener = () => {
@@ -59,7 +66,7 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     return (
         <div className={'gui-scroll'} {...rest}>
             <div className={'gui-scroll-inner'}
-                style={{ 'right': scrollbarwidth() }}
+                style={{ 'right': scrollbarwidth()}}
                 ref={containerRef}
                 onScroll={onscroll}
             >
