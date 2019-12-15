@@ -9,22 +9,52 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 const Scroll: React.FunctionComponent<Props> = (props) => {
     let { children, ...rest } = props
     let [barHeight, setBarHeight] = useState(0)
-    let [barTop, setBarTop] = useState(0)
+    let [barTop, _setBarTop] = useState(0)
     const onscroll: React.UIEventHandler = (e) => {
-        let currentTarget = e.currentTarget
-        let scrollHeight = currentTarget.scrollHeight
-        let viewHeight = currentTarget.getBoundingClientRect().height
-        let scrollTop = currentTarget.scrollTop
+        let { current } = containerRef
+        let scrollHeight = current!.scrollHeight
+        let viewHeight = current!.getBoundingClientRect().height
+        let scrollTop = current!.scrollTop
 
-        setBarTop(scrollTop * viewHeight / scrollHeight)
+        _setBarTop(scrollTop * viewHeight / scrollHeight)
     }
     const containerRef = useRef<HTMLDivElement>(null)
-    useEffect(() => {
+    const draggingRef = useRef<HTMLDivElement>(null)
+    const tragging = useRef(false)
+    const firstY = useRef(0)
+
+
+    const handleOnMouseDown: React.MouseEventHandler = (e) => {
+        tragging.current = true
+        firstY.current = e.clientY
+
+    }
+
+    const handleOnMouseMove: EventListener = (e) => {
+        if (tragging.current && tragging.current) {
+            let delta = e.clientY - firstY.current
+            let { current } = containerRef
+            let scrollHeight = current!.scrollHeight
+            let viewHeight = current!.getBoundingClientRect().height
+            let maxx = (scrollHeight - viewHeight) * viewHeight / scrollHeight
+            if (delta < 0) { delta = 0 }
+            if (delta > maxx) { delta = maxx }
+            _setBarTop(delta)
+
+        }
+    }
+    const handleOnMouseUp: EventListener = () => {
+        tragging.current = false
+    }
+    useEffect(() => { // mounted
         let { current } = containerRef
         let viewHeight = current!.getBoundingClientRect().height
         let scrollHeight = current!.scrollHeight
         setBarHeight(viewHeight * viewHeight / scrollHeight)
+        document.addEventListener('mouseup', handleOnMouseUp)
+        document.addEventListener('mousemove', handleOnMouseMove)
     }, [])
+
     return (
         <div className={'gui-scroll'} {...rest}>
             <div className={'gui-scroll-inner'}
@@ -35,7 +65,10 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
                 {children}
             </div>
             <div className='gui-scroll-track'>
-                <div className='gui-scroll-bar' style={{ 'height': barHeight, 'transform': `translateY(${barTop}px)` }}></div>
+                <div className='gui-scroll-bar' style={{ 'height': barHeight, 'transform': `translateY(${barTop}px)` }}
+                    ref={draggingRef}
+                    onMouseDown={handleOnMouseDown}
+                ></div>
             </div>
         </div>
     )
