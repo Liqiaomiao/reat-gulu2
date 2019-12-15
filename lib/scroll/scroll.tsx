@@ -30,7 +30,7 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
 
     }
 
-    const handleOnMouseMove: EventListener = (e) => {
+    const handleOnMouseMove = (e:MouseEvent) => {
         if (tragging.current && tragging.current) {
             let delta = e.clientY - firstY.current
             let { current } = containerRef
