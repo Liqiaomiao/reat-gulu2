@@ -7,16 +7,24 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 }
 const Scroll: React.FunctionComponent<Props> = (props) => {
-    let { children, ...rest } = props
-    let [barHeight, setBarHeight] = useState(0)
-    let [barTop, _setBarTop] = useState(0)
+    const { children, ...rest } = props
+    const [barHeight, setBarHeight] = useState(0)
+    const [barTop, _setBarTop] = useState(0)
+    const [barVisible, setBarVisible] = useState(false)
+    const timeIdRef = useRef<number | null>(null)
     const onscroll: React.UIEventHandler = (e) => {
         let { current } = containerRef
         let scrollHeight = current!.scrollHeight
         let viewHeight = current!.getBoundingClientRect().height
         let scrollTop = current!.scrollTop
-
+        setBarVisible(true)
         _setBarTop(scrollTop * viewHeight / scrollHeight)
+        if (timeIdRef.current !== null) {
+            window.clearTimeout(timeIdRef.current)
+        }
+        timeIdRef.current = window.setTimeout(() => {
+            setBarVisible(false)
+        }, 1000)
     }
     const containerRef = useRef<HTMLDivElement>(null)
     const draggingRef = useRef<HTMLDivElement>(null)
@@ -82,12 +90,15 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
             >
                 {children}
             </div>
-            <div className='gui-scroll-track'>
-                <div className='gui-scroll-bar' style={{ 'height': barHeight, 'transform': `translateY(${barTop}px)` }}
-                    ref={draggingRef}
-                    onMouseDown={handleOnMouseDown}
-                ></div>
-            </div>
+            {
+                barVisible && <div className='gui-scroll-track'>
+                    <div className='gui-scroll-bar' style={{ 'height': barHeight, 'transform': `translateY(${barTop}px)` }}
+                        ref={draggingRef}
+                        onMouseDown={handleOnMouseDown}
+                    ></div>
+                </div>
+            }
+
         </div>
     )
 }
