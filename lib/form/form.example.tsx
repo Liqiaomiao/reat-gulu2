@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import Form, { FormValue } from "./form";
-import Validator, { noError } from "./validator";
+import Validator from "./validator";
 import Button from "../button/button";
 
 const FormExample: React.FunctionComponent = () => {
