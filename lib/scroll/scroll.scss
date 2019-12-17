@@ -31,4 +31,16 @@
     transition-duration: 0ms;
     height: 426px;
   }
+  &-pulling {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &-icon {
+      font-size: 30px;
+    }
+    &-text {
+      font-size: 12px;
+    }
+  }
 }

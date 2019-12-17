@@ -80,13 +80,49 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
             document.removeEventListener('selectstart', handleOnSelect)
         }
     }, [])
-
+    // pull down fresh
+    const [translateY, _setTranslateY] = useState(0)
+    const lastYRef = useRef(0)
+    const pulling = useRef(false)
+    const moveCount = useRef(0)
+    const setTranslateY = (num: number) => {
+        if (num > 0) {
+            if (num > 150) { num = 150 }
+            _setTranslateY(num)
+        }
+    }
+    const ontouchstart: React.TouchEventHandler = (e) => {
+        const scrollTop = containerRef.current!.scrollTop
+        console.log(scrollTop)
+        if (scrollTop !== 0) { return }
+        pulling.current = true
+        lastYRef.current = e.touches[0].clientY
+    }
+    const ontouchmove: React.TouchEventHandler = (e) => {
+        const delta = e.touches[0].clientY - lastYRef.current
+        moveCount.current++
+        console.log(pulling.current)
+        if (!pulling.current) { return }
+        if (moveCount.current === 1 && delta < 0) {
+            pulling.current = false
+            return
+        }
+        setTranslateY(delta + translateY)
+        lastYRef.current = e.touches[0].clientY
+    }
+    const ontouchend: React.TouchEventHandler = (e) => {
+        _setTranslateY(0)
+        pulling.current = false
+    }
     return (
         <div className={'gui-scroll'} {...rest}>
             <div className={'gui-scroll-inner'}
-                style={{ 'right': scrollbarwidth() }}
+                style={{ 'right': scrollbarwidth(), 'transform': `translateY(${translateY}px)` }}
                 ref={containerRef}
                 onScroll={onscroll}
+                onTouchStart={ontouchstart}
+                onTouchMove={ontouchmove}
+                onTouchEnd={ontouchend}
             >
                 {children}
             </div>
@@ -98,7 +134,11 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
                     ></div>
                 </div>
             }
-
+            <div className="gui-scroll-pulling" style={{ height: translateY }}>
+                {translateY === 150 ?
+                    <span className="fui-scroll-pulling-text">释放手指即可更新</span> :
+                    <span className="fui-scroll-pulling-icon">↓</span>}
+            </div>
         </div>
     )
 }
