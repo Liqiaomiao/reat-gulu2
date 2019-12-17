@@ -4,7 +4,7 @@ import { HTMLAttributes } from 'react';
 import './scroll.scss'
 import scrollbarwidth from './scrollbar-width'
 interface Props extends HTMLAttributes<HTMLDivElement> {
-
+    onPullEnd?: () => void
 }
 const Scroll: React.FunctionComponent<Props> = (props) => {
     const { children, ...rest } = props
@@ -113,6 +113,7 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     const ontouchend: React.TouchEventHandler = (e) => {
         _setTranslateY(0)
         pulling.current = false
+        props.onPullEnd && props.onPullEnd()
     }
     return (
         <div className={'gui-scroll'} {...rest}>

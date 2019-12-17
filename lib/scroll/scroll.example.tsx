@@ -1,9 +1,13 @@
 import * as React from 'react'
 import Scroll from './scroll'
 const ScrollExample: React.FunctionComponent = () => {
+    const onPullEnd = ():void=>{
+        console.log('我知道你已经停止下拉更新')
+    }
+
     return (
         <div style={{ 'width': '100%' }}>
-            <Scroll style={{ height: '300px', border: '1px solid red' }}>
+            <Scroll style={{ height: '300px', border: '1px solid red' }} onPullEnd={onPullEnd}>
                 <div>1</div>
                 <div>2</div>
                 <div>3</div>
