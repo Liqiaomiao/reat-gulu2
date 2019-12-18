@@ -9,6 +9,8 @@ import { Aside, Header, Layout, Content } from "./lib/layout/layout"
 import './example.scss'
 import FormExample from "./lib/form/form.example";
 import ScrollEample from './lib/scroll/scroll.example'
+import citySelectExample from "./lib/citySelect/citySelect.example";
+
 const logo = require('./logo012.png')
 ReactDom.render((
     <Router>
@@ -40,6 +42,9 @@ ReactDom.render((
                         <li>
                             <NavLink to="/scroll">Scroll</NavLink>
                         </li>
+                        <li>
+                            <NavLink to="/cityselect">City Select</NavLink>
+                        </li>
                     </ul>
                 </Aside>
                 <Content className='site-content'>
@@ -50,6 +55,7 @@ ReactDom.render((
                         <Route path="/layout" component={LayoutExample} />
                         <Route path="/form" component={FormExample} />
                         <Route path='/scroll' component={ScrollEample} />
+                        <Route path='/cityselect' component={citySelectExample} />
                     </main>
                 </Content>
             </Layout>
