@@ -5,7 +5,9 @@ import {cities} from './cities'
 const citySelectExample: FC = () => {
     return (
         <div>
-            <CitySelect dataSource={cities}>
+            <h2>第一个例子</h2>
+            <CitySelect dataSource={cities} onSelectCity={(data)=>{alert(`您选择了 ${data}`)}}>
+                选择城市
             </CitySelect>
         </div>
     )
