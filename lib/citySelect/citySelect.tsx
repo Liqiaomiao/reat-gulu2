@@ -5,17 +5,24 @@ import './citySelect.scss'
 
 interface Props {
     dataSource: string[],
-    onSelectCity:(city:string)=>void
-}
-interface Context {
-    map: { [key: string]: string[] },
-    onSelectCity:(city:string)=>void
+    onSelectCity: (city: string) => void
 }
 
-const CitySelectContext = React.createContext<Context>({map: {},onSelectCity:(city='')=>{}})
+interface Context {
+    map: { [key: string]: string[] },
+    onSelectCity: (city: string) => void
+}
+
+const CitySelectContext = React.createContext<Context>({
+    map: {}, onSelectCity: (city = '') => {
+    }
+})
 const Dialog: FC<{ onClose: () => void }> = (props) => {
-    const {map,onSelectCity} = useContext(CitySelectContext)
-    const cityList = Object.entries(map).sort((a,b)=>a[0].charCodeAt(0)-b[0].charCodeAt(0))
+    const {map, onSelectCity} = useContext(CitySelectContext)
+    const cityList = Object.entries(map).sort((a, b) => a[0].charCodeAt(0) - b[0].charCodeAt(0))
+    const scrollInToView = (cityKey: string) => {
+        document.getElementById(cityKey)!.scrollIntoView(true)
+    }
     return (
         ReactDOM.createPortal((
             <div className='gui-citySelect-dialog'>
@@ -27,21 +34,24 @@ const Dialog: FC<{ onClose: () => void }> = (props) => {
                 <h2>全部城市</h2>
                 <ol className='gui-citySelect-index'>
                     {
-                        cityList.map(city=>(<li key={city[0]}>{city[0]}</li>))
+                        cityList.map(city => (
+                            <li onClick={(key) => scrollInToView(city[0])} key={city[0]}>{city[0]}</li>))
                     }
                 </ol>
                 <ul className='cityList'>
                     {
                         cityList.map(([itemkey, itemvalue]) => (
-                            <li key={itemkey} className="gui-citySelect-citySection">
+                            <li id={itemkey} key={itemkey} className="gui-citySelect-citySection">
                                 <h4>
                                     {itemkey}
                                 </h4>
                                 {
-                                    itemvalue.map(value=>(
-                                       <p  className="gui-citySelect-cityName" key={value} onClick={()=>{onSelectCity(value)}}>
-                                           {value}
-                                       </p>
+                                    itemvalue.map(value => (
+                                        <p className="gui-citySelect-cityName" key={value} onClick={() => {
+                                            onSelectCity(value)
+                                        }}>
+                                            {value}
+                                        </p>
                                     ))
                                 }
                             </li>
@@ -80,7 +90,6 @@ const CurrentLocation: FC = () => {
 }
 
 
-
 const CitySelect: FC<Props> = (props) => {
     const [dialogVisible, setDialogVisible] = useState(false)
     const map: Context['map'] = {}
@@ -97,9 +106,9 @@ const CitySelect: FC<Props> = (props) => {
         setDialogVisible(false)
     }
     return (
-        <CitySelectContext.Provider value={{map,onSelectCity:props.onSelectCity}}>
+        <CitySelectContext.Provider value={{map, onSelectCity: props.onSelectCity}}>
             <div onClick={onclick}>{props.children}</div>
-            {dialogVisible && <Dialog onClose={onClose} ></Dialog>}
+            {dialogVisible && <Dialog onClose={onClose}></Dialog>}
 
         </CitySelectContext.Provider>
     )
