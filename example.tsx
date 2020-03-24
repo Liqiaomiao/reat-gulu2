@@ -10,6 +10,7 @@ import './example.scss'
 import FormExample from "./lib/form/form.example";
 import ScrollEample from './lib/scroll/scroll.example'
 import citySelectExample from "./lib/citySelect/citySelect.example";
+import Tree from "./lib/tree/treeExample";
 
 const logo = require('./logo012.png')
 ReactDom.render((
@@ -45,6 +46,9 @@ ReactDom.render((
                         <li>
                             <NavLink to="/cityselect">City Select</NavLink>
                         </li>
+                        <li>
+                            <NavLink to='/tree'> Tree</NavLink>
+                        </li>
                     </ul>
                 </Aside>
                 <Content className='site-content'>
@@ -56,6 +60,7 @@ ReactDom.render((
                         <Route path="/form" component={FormExample} />
                         <Route path='/scroll' component={ScrollEample} />
                         <Route path='/cityselect' component={citySelectExample} />
+                        <Route path='/tree' component={Tree}></Route>
                     </main>
                 </Content>
             </Layout>
